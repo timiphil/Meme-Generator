@@ -31,7 +31,7 @@ export default function Meme() {
             [name]: value
         }))
     }
-    
+
     return (
         <main>
             <div className="form">

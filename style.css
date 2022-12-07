@@ -8,12 +8,13 @@ body {
 }
 
 main {
-    padding: 36px;
+    padding: 40px;
 }
 
 .header {
     display: flex;
     align-items: center;
+    justify-content: center;
     height: 65px;
     background: linear-gradient(90deg, #672280 1.18%, #A626D3 100%);
     color: white;
@@ -26,12 +27,12 @@ main {
 }
 
 .header--title {
-    font-size: 1.25rem;
+    font-size: 3rem;  
     margin-right: auto;
 }
 
 .header--project {
-    font-size: 0.75rem;
+    font-size: 1.20rem;
     font-weight: 500;
 }
 
@@ -57,15 +58,17 @@ main {
     color: white;
     border: none;
     cursor: pointer;
+    font-size: 1.50rem;
 }
 
 .meme {
     position: relative;
+
 }
 
 .meme--image {
     max-width: 100%;
-    border-radius: 3px;
+    border-radius: 5px;
 }
 
 .meme--text {

@@ -512,9 +512,121 @@ function Header() {
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-throw new Error("Module build failed: SyntaxError: Unexpected token (22:12)\n\n\u001b[0m \u001b[90m 20 | \u001b[39m        \u001b[36mconst\u001b[39m url \u001b[33m=\u001b[39m allMemes[randomNumber]\u001b[33m.\u001b[39murl\n \u001b[90m 21 | \u001b[39m        setMeme(prevMeme \u001b[33m=>\u001b[39m ({\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 22 | \u001b[39m            \u001b[33m...\u001b[39mprevMeme\u001b[33m,\u001b[39m\n \u001b[90m    | \u001b[39m            \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 23 | \u001b[39m            randomImage\u001b[33m:\u001b[39m url\n \u001b[90m 24 | \u001b[39m        }))\n \u001b[90m 25 | \u001b[39m        \u001b[0m\n");
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+exports.default = Meme;
+
+var _react = __webpack_require__(1);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function Meme() {
+    var _React$useState = _react2.default.useState({
+        topText: "",
+        bottomText: "",
+        randomImage: "http://i.imgflip.com/1bij.jpg"
+    }),
+        _React$useState2 = _slicedToArray(_React$useState, 2),
+        meme = _React$useState2[0],
+        setMeme = _React$useState2[1];
+
+    var _React$useState3 = _react2.default.useState([]),
+        _React$useState4 = _slicedToArray(_React$useState3, 2),
+        allMemes = _React$useState4[0],
+        setAllMemes = _React$useState4[1];
+
+    _react2.default.useEffect(function () {
+        fetch("https://api.imgflip.com/get_memes").then(function (res) {
+            return res.json();
+        }).then(function (data) {
+            return setAllMemes(data.data.memes);
+        });
+    }, []);
+
+    function getMemeImage() {
+        var randomNumber = Math.floor(Math.random() * allMemes.length);
+        var url = allMemes[randomNumber].url;
+
+        setMeme(function (prevMeme) {
+            return _extends({}, prevMeme, {
+                randomImage: url
+            });
+        });
+    }
+
+    function handleChange(event) {
+        var _event$target = event.target,
+            name = _event$target.name,
+            value = _event$target.value;
+
+        setMeme(function (prevMeme) {
+            return _extends({}, prevMeme, _defineProperty({}, name, value));
+        });
+    }
+
+    return _react2.default.createElement(
+        "main",
+        null,
+        _react2.default.createElement(
+            "div",
+            { className: "form" },
+            _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Type Top text",
+                className: "form--input",
+                name: "topText",
+                value: meme.topText,
+                onChange: handleChange
+            }),
+            _react2.default.createElement("input", {
+                type: "text",
+                placeholder: "Type Bottom text",
+                className: "form--input",
+                name: "bottomText",
+                value: meme.bottomText,
+                onChange: handleChange
+            }),
+            _react2.default.createElement(
+                "button",
+                {
+                    className: "form--button",
+                    onClick: getMemeImage
+                },
+                "Get a new meme image \uD83D\uDDBC"
+            )
+        ),
+        _react2.default.createElement(
+            "div",
+            { className: "meme" },
+            _react2.default.createElement("img", { src: meme.randomImage, className: "meme--image" }),
+            _react2.default.createElement(
+                "h2",
+                { className: "meme--text top" },
+                meme.topText
+            ),
+            _react2.default.createElement(
+                "h2",
+                { className: "meme--text bottom" },
+                meme.bottomText
+            )
+        )
+    );
+}
 
 /***/ }),
 /* 8 */
